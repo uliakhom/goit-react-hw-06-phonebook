@@ -1,20 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import s from './filter.module.css';
-import { changeFilter } from 'redux/filter/filter-actions';
-import { getFilter } from 'redux/filter/filter-selectors';
 
-const Filter = () => {
+const Filter = ({ filter, filterContact }) => {
   const loginInputId = nanoid();
-
-  const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
-
-  const filterContact = ({ target }) => {
-    const action = changeFilter(target.value);
-
-    dispatch(action);
-  };
 
   return (
     <div className={s.container}>
@@ -33,3 +22,8 @@ const Filter = () => {
 };
 
 export default Filter;
+
+Filter.propTypes = {
+  filterContact: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};
